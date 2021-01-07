@@ -1,0 +1,7 @@
+--- mutex:
+cycles/second=3186853548
+sampling period=1
+15958747183 1 @ 0x46318c 0x4c7cf0 0x453871
+#	0x46318b	sync.(*Mutex).Unlock+0x7b	E:/GO/src/sync/mutex.go:201
+#	0x4c7cef	main.main.func1+0x6f		C:/Users/JovenLiu/Desktop/go/src/pprof/block/block.go:53
+

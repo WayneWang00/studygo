@@ -1,0 +1,12 @@
+test profile: total 2
+1 @ 0x4bd741 0x4c818a 0x42cde2 0x4535b1
+#	0x4bd740	runtime/pprof.(*Profile).Add+0xc0	E:/GO/src/runtime/pprof/pprof.go:269
+#	0x4c8189	main.main+0xe9				C:/Users/JovenLiu/Desktop/go/src/pprof/testAdd/test.go:18
+#	0x42cde1	runtime.main+0x221			E:/GO/src/runtime/proc.go:195
+
+1 @ 0x4bd741 0x4c8303 0x4c815b 0x42cde2 0x4535b1
+#	0x4bd740	runtime/pprof.(*Profile).Add+0xc0	E:/GO/src/runtime/pprof/pprof.go:269
+#	0x4c8302	main.add+0x52				C:/Users/JovenLiu/Desktop/go/src/pprof/testAdd/test.go:26
+#	0x4c815a	main.main+0xba				C:/Users/JovenLiu/Desktop/go/src/pprof/testAdd/test.go:17
+#	0x42cde1	runtime.main+0x221			E:/GO/src/runtime/proc.go:195
+

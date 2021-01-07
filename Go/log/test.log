@@ -1,0 +1,8 @@
+[DEUBG]2020/08/13 15:56:10 a logger.println message is here
+[DEUBG]2020/08/13 15:56:10 a logger.output message is here
+[DEUBG]2020/08/13 15:56:10 a logger.println message is here
+[DEUBG]2020/08/13 15:56:10 a logger.output message is here
+[INFO]2020/08/13 15:56:10 /home/website/Global/src/Wayne/Go/log/log.go:64: a logger.println message is here
+[INFO]2020/08/13 15:56:10 /home/website/Global/src/Wayne/Go/log/log.go:21: a logger.output message is here
+[INFO]2020/08/13 15:56:10 /home/website/Global/src/Wayne/Go/log/log.go:76: a log.println message is here
+[INFO]2020/08/13 15:56:10 /home/website/Global/src/Wayne/Go/log/log.go:22: a log.output message is here

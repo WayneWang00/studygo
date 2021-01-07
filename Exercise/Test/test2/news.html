@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>博雅新闻</title>
+</head>
+<body>
+<h1>News</h1>
+<ul class="nlist">
+{{range .Nlist}}
+    <li>
+        <em>{{.Time}}</em>
+        <a href='{{.Url}}'>{{.Title}}</a>
+    </li>
+{{end}}
+</ul>
+<div class="pages">
+    <a href="news.html" title="1">1</a>
+    <a href="news2.html" title="2">2</a>
+    <a href="news3.html" title="3">3</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TOP 信息：</title>
+
+</head>
+<body>
+    <table>
+        <tr>
+            <th>
+                指标
+            </th>
+            <th>
+                total
+            </th>
+            <th>
+                used
+            </th>
+            <th>
+                free
+            </th>
+            <th>
+                buff
+            </th>
+            <th>
+                avail mem
+            </th>
+        </tr>
+        {{range $_, $v := .Infos}}
+        <tr>
+            <th>{{$v.Name}}</th>
+            <th>{{$v.Total}}</th>
+            <th>{{$v.Used}}</th>
+            <th>{{$v.Free}}</th>
+            <th>{{$v.Buff}}</th>
+            <th>{{$v.Avail}}</th>
+        </tr>
+       {{end}}
+    </table>
+</body>
+</html>

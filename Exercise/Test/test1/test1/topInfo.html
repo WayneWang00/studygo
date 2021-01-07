@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <h3>当前服务器状态如下：</h3>
+
+</head>
+<body>
+    <table border = "1" cellpadding="4" cellspacing="0">
+        <tr>
+            <th>
+                指标
+            </th>
+            <th>
+                total
+            </th>
+            <th>
+                used
+            </th>
+            <th>
+                free
+            </th>
+            <th>
+                buffs/cached
+            </th>
+        </tr>
+        {{range $i, $v := .Infos}}
+
+        <tr>
+            {{if eq $i 0}}
+                <th>Mem</th>
+            {{else}}
+                <th>Swap</th>
+            {{end}}
+            {{range $key, $value := $v}}
+               <th>{{$value}}</th>
+            {{end}}
+
+        </tr>
+       {{end}}
+    </table>
+</body>
+</html>

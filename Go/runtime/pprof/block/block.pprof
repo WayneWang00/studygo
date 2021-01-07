@@ -1,0 +1,6 @@
+--- contention:
+cycles/second=3186853548
+15958853143 1 @ 0x462f65 0x4c7d54 0x453871
+#	0x462f64	sync.(*Mutex).Lock+0xf4	E:/GO/src/sync/mutex.go:134
+#	0x4c7d53	main.main.func2+0x33	C:/Users/JovenLiu/Desktop/go/src/pprof/block/block.go:55
+

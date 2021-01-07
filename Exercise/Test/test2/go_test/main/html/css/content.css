@@ -1,0 +1,202 @@
+#container {
+    float: none;
+    margin: 240px auto;
+
+    width: 1002px;
+
+}
+
+ul li{
+    list-style-type:none;
+}
+
+
+#header {
+
+    height: 60px;
+    background: #191d3a;
+
+}
+
+#nav{
+    margin-left: 300px;
+    height: 60px;
+
+}
+
+
+#nav li {
+
+    float: left;
+    width: 130px;
+    /*margin-right: 20px;*/
+    margin-top: 16px;
+
+}
+
+
+
+#nav a {
+
+    font-size: 16px;
+
+    font-family: "微软雅黑";
+
+    color: #e2e4ed;
+
+    display: block;
+
+    height: 40px;
+
+    width: 90px;
+
+    text-align: center;
+    text-decoration: none;
+}
+
+
+#logo {
+    /*height: 200px;*/
+    margin-top: -20px;
+}
+
+#nav a:hover {
+
+
+    color: white;
+
+
+}
+
+
+#main{
+    padding-top: 40px;
+    height: 300px;
+
+}
+
+
+
+.subtitle{
+
+    height: 37px;
+
+
+}
+
+
+
+.subtitle h1{
+
+    float:left;
+
+    font-size: 16px;                           /*12对标题中字体进行设置*/
+
+    font-family: "微软雅黑",simhei,sans-serif;
+
+    margin-left:10px;
+
+}
+
+.subtitle a{
+
+    float: right;
+
+    font-size: 12px;
+
+    /*color: gray;*/
+
+}
+
+.main_new{
+    float: left;
+}
+
+
+.main_new ul{
+
+    float: left;
+
+    margin-left: 10px;
+
+}
+
+.main_new li{
+
+    padding-left: 10px;
+
+    height: 20px;
+
+}
+
+.main_new a{
+    color:black;
+}
+
+.main_new_2{
+    float: left;
+    width: 650px;
+    padding-bottom: 10px;
+    /*height: 600px;*/
+}
+
+.new_2 li {
+    margin-top: 30px;
+    /*width: 30px;*/
+}
+
+.new_2 li a{
+    font-size: 13px;
+    text-decoration: none;
+}
+
+
+#lside{
+
+    /*height: 480px;*/
+padding-bottom: 10px;
+    width: 694px;
+
+    border: 1px solid #d1dce7;
+
+    float: left;
+
+    border-bottom: none;
+    border-left: none
+
+}
+
+
+
+#rside{
+    border-top: 1px solid #d1dce7;
+    width: 294px;
+
+    margin-right: 10px;
+    float: right;
+
+
+}
+
+
+#rside img{
+    margin-left: 40px;
+}
+
+
+.foot{
+    clear: both;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: #191d3a;
+    color: #abafd0;
+    font-size: 10px;
+}
+
+.foot p {
+    margin-left: 450px;
+}
+.foot p a {
+    color: #abafd0;
+    text-decoration: none;
+}
