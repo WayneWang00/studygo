@@ -1,7 +1,7 @@
 package main
 
 import (
-	"Wayne/IPQuery/ipquery"
+	"ipQuery/ipquery"
 	"fmt"
 	"strconv"
 	"strings"

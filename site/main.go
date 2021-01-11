@@ -1,7 +1,7 @@
 package main
 
 import (
-	"Wayne/site/static"
+	"site/static"
 	"fmt"
 	"net/http"
 )

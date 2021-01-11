@@ -1,7 +1,7 @@
 package router
 
 import (
-	"Wayne/cms/backend/ws"
+	"webSocket/ws"
 	"fmt"
 	"github.com/gin-gonic/gin"
 )

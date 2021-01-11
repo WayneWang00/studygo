@@ -1,0 +1,10 @@
+github.com/qiniu/iconv v1.2.0 h1:2LJKwoF+4LJ3lNM+7cE3P1kNQzAI/HMZuWhkmFoY2U8=
+github.com/qiniu/iconv v1.2.0/go.mod h1:5bxb2h9lptZt2eHLgY+Jw4X06TMtKb6tvvok0DwSwGA=
+github.com/sesehai/qqwry v0.0.0-20140519095302-cc8d49d285d1 h1:7LetYwB0y4DpzFnI/hqDXVHZjUCeVTpT+BuYfbIUL1Y=
+github.com/sesehai/qqwry v0.0.0-20140519095302-cc8d49d285d1/go.mod h1:gkhKybNNtTLJXrXjDBrMTzdwEy+6xm7re/AkmJLoqvY=
+github.com/tabalt/ipquery v0.0.0-20161127181128-a1d104814f78 h1:ZWq2o+mEwFDc3xzZkiv1qD+X2uRb+qDfZYkWbaUK+Rc=
+github.com/tabalt/ipquery v0.0.0-20161127181128-a1d104814f78/go.mod h1:FCnF2PR2BZ7kPKiTTSbcHM9YzYS9pQD0topmWvzZ/ko=
+github.com/yinheli/mahonia v0.0.0-20131226213531-0eef680515cc h1:7VHQaaNwHymWbj8lAcXMYX1qopebSBHwYC3ceXLWONU=
+github.com/yinheli/mahonia v0.0.0-20131226213531-0eef680515cc/go.mod h1:Pcc297eVCbkDBBVq8FbnI+qDUeIMrHy4Bo7nveAuCAs=
+github.com/yinheli/qqwry v0.0.0-20160229183603-f50680010f4a h1:VUPXGL4N1B5xqomxI4vZn0momgleh0hcH0PE/oIOsAI=
+github.com/yinheli/qqwry v0.0.0-20160229183603-f50680010f4a/go.mod h1:Zva9ErVtC2arl+9xtHwiXujgejX1S3VpOYExADJ9kio=

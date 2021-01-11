@@ -1,6 +1,6 @@
 package main
 
-import "Wayne/cms/backend/router"
+import "webSocket/router"
 
 func main() {
 	router.Init()
