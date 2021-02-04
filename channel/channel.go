@@ -9,7 +9,9 @@ func main() {
 	//UnBuffChannel()
 	//BuffChannel()
 	//NewUnBuffChannel()
-	NewBuffChannel()
+	//NewBuffChannel()
+	//NilChannel()
+	stopGoroutine()
 	fmt.Println("end")
 }
 
@@ -73,4 +75,62 @@ func NewBuffChannel() {
 	go writeRoutine(ch, v)
 	readRoutine(ch)
 	fmt.Println(v)
+}
+
+func NilChannel() {
+	var inCh = make(chan int)
+	var outCh = make(chan int)
+
+	go func() {
+		var in <-chan int = inCh
+		var out chan<- int
+		var val int
+
+		for {
+			select {
+			case out <- val:
+				fmt.Println("----------")
+				fmt.Println("out val:", val)
+				out = nil
+				in = inCh
+			case val = <-in:
+				fmt.Println("++++++++++")
+				fmt.Println("in val:", val)
+				in = nil
+				out = outCh
+			}
+		}
+	}()
+
+	go func() {
+		for r := range outCh {
+			fmt.Println("Result:", r)
+		}
+	}()
+
+	time.Sleep(0)
+	inCh <- 1
+	inCh <- 2
+	time.Sleep(3 * time.Second)
+}
+
+func stopGoroutine() {
+	stop := make(chan bool)
+	go func() {
+		for {
+			select {
+			case <-stop:
+				fmt.Println("监控退出，停止了...")
+				return
+			default:
+				fmt.Println("goroutine监控中...")
+				time.Sleep(2 * time.Second)
+			}
+		}
+	}()
+	time.Sleep(10 * time.Second)
+	fmt.Println("可以了，通知监控停止")
+	stop <- true
+	//为了检测监控过是否停止，如果没有监控输出，就表示停止了
+	time.Sleep(5 * time.Second)
 }
