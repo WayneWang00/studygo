@@ -5,6 +5,7 @@ import "fmt"
 func main() {
 	nilKey()
 	nilValue()
+	//intKey()
 }
 
 func nilValue() {
@@ -34,4 +35,11 @@ func nilKey() {
 	} else {
 		fmt.Println(v)
 	}
+}
+
+func intKey() {
+	var a = map[int]string{1: "test", 2: "string"}
+	fmt.Printf("a:%+v\n", a)
+	fmt.Println("a[1]:", a[1])
+	fmt.Println("a[2]:", a[2])
 }

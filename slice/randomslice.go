@@ -13,6 +13,7 @@ var (
 )
 
 func main() {
+	now := time.Now()
 	a := []int{0, 1}
 	for i := 0; i < 10000; i++ {
 		randslice()
@@ -24,6 +25,7 @@ func main() {
 	shuffle1()
 	val := []int{10, 12, 14, 16, 18, 20}
 	fmt.Println(shuffle(val))
+	fmt.Println("time:", time.Now().Sub(now))
 }
 func sliceOutOfOrder(in []int) []int {
 	l := len(in)

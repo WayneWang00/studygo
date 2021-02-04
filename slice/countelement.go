@@ -22,5 +22,5 @@ func main() {
 		}
 		b[a[i]] = c
 	}
-	fmt.Printf("b value: %+v", b)
+	fmt.Printf("b value: %+v\n", b)
 }

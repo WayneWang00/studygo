@@ -10,12 +10,16 @@ func main() {
 	//fmt.Println("c")
 	//defer fmt.Println("d")
 	//fmt.Println("e")
+
 	fmt.Println("f1:", f1())
-	fmt.Println("f2:", f2())
-	fmt.Println("f3:", f3())
-	fmt.Println("f4:", f4())
-	fmt.Println("testDefer1:", testDefer1())
-	fmt.Println("testDefer2:", testDefer2())
+	n := f2()
+	fmt.Println("f2:", n, &n)
+	//fmt.Println("f3:", f3())
+	//fmt.Println("f4:", f4())
+	//fmt.Println("testDefer1:", testDefer1())
+	//fmt.Println("testDefer2:", testDefer2())
+
+	//deferRecover()
 }
 
 // 1.r=0 2.r++ 3.return 	r=1
@@ -31,7 +35,9 @@ func f2() (r int) {
 	t := 5
 	defer func() {
 		t = t + 5
+		fmt.Println("defer t:", t, &t)
 	}()
+	fmt.Println("defer before t:", t, &t)
 	return t
 }
 
@@ -65,4 +71,17 @@ func testDefer2() (r int) {
 		r++
 	}()
 	return r
+}
+
+func deferRecover() {
+	defer func() {
+		//fmt.Println("recover:", recover()) // recover: test panic
+		doRecover() // recover: <nil>
+	}()
+
+	panic("test panic")
+}
+
+func doRecover() {
+	fmt.Println("recover:", recover())
 }

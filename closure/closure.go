@@ -20,6 +20,7 @@ func incr() func() int {
 	var x int
 	return func() int {
 		x++
+		fmt.Println("&x:", &x)
 		return x
 	}
 }
