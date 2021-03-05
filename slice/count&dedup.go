@@ -5,34 +5,34 @@ import (
 )
 
 func main() {
-	//count()
-	deduplication()
+	count()
+	//deDuplication()
 }
 
+// 计数
 func count() {
-	a := []int{1, 2, 3, 4, 4, 3, 2, 1}
+	a := []int{1, 2, 3, 4, 5, 4, 3, 2, 1}
 	b := make(map[int]int)
 
-	for i := 0; i < len(a); i++ {
-		if v, ok := b[a[i]]; ok {
-			b[a[i]] = v + 1
+	for _, item := range a {
+		if v, ok := b[item]; ok {
+			b[item] = v + 1
 		} else {
-			b[a[i]] = 1
+			b[item] = 1
 		}
 	}
 
 	fmt.Printf("b value:%+v\n", b)
 }
 
-func deduplication() {
+// 去重
+func deDuplication() {
 	var a = []int{1, 2, 3, 4, 5, 4, 3, 2, 1}
 	b := make(map[int]struct{})
 	var c []int
 
 	for i := 0; i < len(a); i++ {
-		if _, ok := b[a[i]]; ok {
-			continue
-		} else {
+		if _, ok := b[a[i]]; !ok {
 			c = append(c, a[i])
 			b[a[i]] = struct{}{}
 		}

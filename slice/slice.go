@@ -1,17 +1,17 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"unsafe"
+)
 
 func main() {
 	//dosmt1(nil)
 	//dosmt2(0)
 	//testAppend()
-	//arr2Slice()
-	rangeSlice()
-	s := make([]int32, 0)
-	for _, v := range s {
-		fmt.Println(v)
-	}
+	arr2Slice()
+	//rangeSlice()
+	//towDimensionSlice()
 }
 
 func dosmt1(is []int) {
@@ -73,4 +73,21 @@ func rangeSlice() {
 	for k := range slice1 {
 		fmt.Println(k, ":", slice1[k])
 	}
+}
+
+func towDimensionSlice() {
+	x, y := 2, 4
+	table := make([][]int, x)
+	for k := range table {
+		table[k] = make([]int, y)
+	}
+	fmt.Printf("%v\n", table)
+
+	i := [][]int{{1, 2, 3, 4}, {2, 3, 4}, {4, 5}, {6}, {0}, {5}}
+	var j = make([][]int, 5, 5)
+	fmt.Println("二维切片i：", i)
+	fmt.Println("二维切片i字节数：", unsafe.Sizeof(i))
+	fmt.Println("二维切片j：", j)
+	fmt.Println(len(j), cap(j))
+	fmt.Println(len(i[0]), cap(i[1]))
 }

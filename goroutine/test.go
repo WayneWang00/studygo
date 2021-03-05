@@ -3,16 +3,22 @@ package main
 import (
 	"runtime"
 	"sync"
+	"time"
 
 	"fmt"
-	"time"
 )
 
-func paramstest(s map[string]string, i ...interface{}) interface{} {
+func paramsTest(s map[string]string, i ...interface{}) interface{} {
 	return nil
 }
 
 func main() {
+	//paramsTest(map[string]string{})
+	//go32()
+	Add26()
+}
+
+func go32() {
 	runtime.GOMAXPROCS(1)
 	wg := sync.WaitGroup{}
 	wg.Add(32)
@@ -70,4 +76,39 @@ func main() {
 	//}
 	wg.Wait()
 	//fmt.Println("测试")
+}
+
+func Add26() {
+	runtime.GOMAXPROCS(1)
+	var wg sync.WaitGroup
+	wg.Add(2)
+	fmt.Println("start goroutine")
+
+	go func() {
+		defer wg.Done()
+
+		for count := 0; count < 3; count++ {
+			fmt.Println("a count:", count)
+			for char := 'a'; char < 'a'+26; char++ {
+				fmt.Printf("%c ", char)
+			}
+			fmt.Println()
+		}
+	}()
+
+	go func() {
+		defer wg.Done()
+
+		for count := 0; count < 3; count++ {
+			fmt.Println("A count:", count)
+			for char := 'A'; char < 'A'+26; char++ {
+				fmt.Printf("%c ", char)
+			}
+			fmt.Println()
+		}
+	}()
+
+	fmt.Println("waiting ...")
+	wg.Wait()
+	fmt.Println("end goroutine")
 }

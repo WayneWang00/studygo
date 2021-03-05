@@ -4,8 +4,10 @@ import "fmt"
 
 func main() {
 	a := 1
+	fmt.Println("new a:", &a)
 	f := func() int {
 		a++
+		fmt.Println("&a:", &a)
 		return a
 	}
 	fmt.Println("f1:", f())

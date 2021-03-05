@@ -19,4 +19,9 @@ func main() {
 		ret1[j] = "test" + strconv.Itoa(j)
 	}
 	fmt.Println("ret1 value: ", ret1)
+
+	s := make([]int32, 0)
+	for _, v := range s {
+		fmt.Println(v)
+	}
 }

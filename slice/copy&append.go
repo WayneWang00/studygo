@@ -3,8 +3,9 @@ package main
 import "fmt"
 
 func main() {
+	appendElement()
 	//appendSlice()
-	copySlice()
+	//copySlice()
 }
 
 func appendElement() {
@@ -19,18 +20,18 @@ func appendElement() {
 	//fmt.Printf("slice2 = %p, len = %d, cap = %d %v \n", slice2, len(slice2), cap(slice2), slice2)
 	//fmt.Printf("slice3 = %p, len = %d, cap = %d %v \n", slice3, len(slice3), cap(slice3), slice3)
 
-	s := []int{1, 2}
-	fmt.Printf("len=%d, cap=%d\n", len(s), cap(s))
+	s := []int{1, 2, 3}
+	fmt.Printf("s:%+v, len=%d, cap=%d\n", s, len(s), cap(s))
 	s1 := append(s, 4, 5, 6)
-	fmt.Printf("len=%d, cap=%d\n", len(s1), cap(s1))
+	fmt.Printf("s1:%+v, len=%d, cap=%d\n", s1, len(s1), cap(s1))
 	s2 := append(s, 4, 5, 6, 7)
-	fmt.Printf("len=%d, cap=%d", len(s2), cap(s2))
+	fmt.Printf("s2:%+v, len=%d, cap=%d\n", s2, len(s2), cap(s2))
 }
 
 func appendSlice() {
 	var s1 []int
 	s2 := []int{1, 2, 3}
-	s3 := []int{4, 5, 6}
+	s3 := []int{4, 5, 6, 7}
 	s1 = append(s2, s3...)
 	fmt.Printf("s1:%+v, len=%d, cap=%d\n", s1, len(s1), cap(s1))
 	fmt.Printf("s2:%+v, len=%d, cap=%d\n", s2, len(s2), cap(s2))

@@ -3,9 +3,9 @@ package main
 import "fmt"
 
 func main() {
-	general()
+	//general()
 	//boolean()
-	//integer()
+	integer()
 	//floatAndComplex()
 	//stringAndByte()
 	//sliceAndPoint()
@@ -52,6 +52,10 @@ func boolean() {
 
 // 整数
 func integer() {
+	var b uint = 45
+	fmt.Printf("b:%b\n", b)
+	var c int = 45
+	fmt.Printf("c:%b\n", c)
 	var a = 45
 	fmt.Printf("%b\n", a) // 二进制
 	fmt.Printf("%c\n", a) // 对应的unicode码值

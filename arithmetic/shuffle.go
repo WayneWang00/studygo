@@ -40,7 +40,7 @@ func KnuthDurstenfeld() {
 	var value = []int{1, 2, 3, 4, 5, 6, 7, 8}
 	n := len(value)
 	rand.Seed(time.Now().UnixNano())
-	for i := 1; i < n; i++ {
+	for i := n - 1; i > 0; i-- {
 		l := rand.Intn(i)
 		value[i], value[l] = value[l], value[i]
 	}
