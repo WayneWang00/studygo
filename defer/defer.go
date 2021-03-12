@@ -20,7 +20,8 @@ func main() {
 	//fmt.Println("testDefer2:", testDefer2())
 
 	//deferRecover()
-	deferCall()
+	//deferCall()
+	deferFunc()
 }
 
 // 1.r=0 2.r++ 3.return 	r=1
@@ -94,4 +95,13 @@ func deferCall() {
 	fmt.Println(444)
 	fmt.Println(555)
 	fmt.Println(666)
+}
+
+func deferFunc() {
+	defer func() {
+		fmt.Println("defer end")
+	}()
+
+	fmt.Println("defer start")
+	deferCall()
 }

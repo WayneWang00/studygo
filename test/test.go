@@ -124,18 +124,28 @@ func main() {
 	//testMap()
 	//testInterface()
 	//testNil()
+	testInt()
+}
+
+const s = "aa"
+
+func testInt() {
+	n1 := 1 << len(s[:])
+	fmt.Println("n1:", n1)
+	n2 := 1 << len(s)
+	fmt.Println("n2:", n2)
 }
 
 func testNil() {
-	var a = new(*teststr)
+	var a = new(*testStr)
 	fmt.Println("a:", *a)
 }
 
-type teststr struct {
+type testStr struct {
 	name string
 	age  int32
 }
 
 type struct1 = struct {
-	teststr
+	testStr
 }

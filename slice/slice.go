@@ -9,9 +9,10 @@ func main() {
 	//dosmt1(nil)
 	//dosmt2(0)
 	//testAppend()
-	arr2Slice()
+	//arr2Slice()
 	//rangeSlice()
 	//towDimensionSlice()
+	reSlice()
 }
 
 func dosmt1(is []int) {
@@ -90,4 +91,10 @@ func towDimensionSlice() {
 	fmt.Println("二维切片j：", j)
 	fmt.Println(len(j), cap(j))
 	fmt.Println(len(i[0]), cap(i[1]))
+}
+
+func reSlice() {
+	a := []int{1, 2}
+	b := a[1:2]
+	fmt.Println(b)
 }

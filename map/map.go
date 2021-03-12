@@ -6,8 +6,8 @@ import (
 )
 
 func main() {
-	nilMap()
-	//nilKey()
+	//nilMap()
+	nilKey()
 	//nilValue()
 	//intKey()
 	//lenMap()
@@ -57,11 +57,12 @@ func nilKey() {
 		fmt.Println(v)
 	}
 	// 这里 不是 :=，是 = ，因为这些变量已经定义过了。
-	v, OK = map1["key3"]
-	if OK {
-		fmt.Println(v, OK)
+	v1, ok := map1["key3"]
+	if ok {
+		fmt.Println(v1, OK)
 	} else {
-		fmt.Println(v)
+		fmt.Println(v1)
+		fmt.Printf("type:%T\n", v1)
 	}
 }
 
