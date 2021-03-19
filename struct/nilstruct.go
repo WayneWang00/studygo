@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"reflect"
 	"time"
+	"unsafe"
 )
 
 type A struct {
@@ -42,6 +43,8 @@ func main() {
 	//if ret.Name == "" { // 会报错
 	//	fmt.Println("ret.Name is nil")
 	//}
+
+	sizeOfStruct()
 }
 
 //清空已经赋值的struct
@@ -98,4 +101,35 @@ func (a *A) toChange() A {
 		Name:  a.Name, // 会报错
 		Level: a.Level,
 	}
+}
+
+/*
+	1：值类型
+		bool、int、float、(unsafe)pointer、struct、array
+	2：复合类型
+		channel、map、func、pointer：一个指针，指向具体的数据。8字节
+		string、interface：string一个指针，指向底层字节切片，一个整形表示长度；interface两个指针，一个指向类型，一个指向具体数据。16字节
+		slice：一个指针，指向底层数组，两个整形分别表示长度和容量。24字节
+*/
+func sizeOfStruct() {
+	fmt.Println(unsafe.Sizeof([]int{}))        // 24
+	fmt.Println(unsafe.Sizeof(interface{}(0))) // 16
+	fmt.Println(unsafe.Sizeof(string("")))     // 16
+	fmt.Println(unsafe.Sizeof(struct{}{}))     // 0
+	fmt.Println(unsafe.Sizeof(false))          // 1
+	fmt.Println(unsafe.Sizeof(int(0)))         // 8
+	fmt.Println(unsafe.Sizeof(float32(0)))     // 4
+	fmt.Println(unsafe.Sizeof([1]int{}))       // 8
+
+	// 内存对齐
+	fmt.Println(unsafe.Sizeof(struct {
+		a bool
+		b string
+		c bool
+	}{})) // 32 bool=1 string=16 第一和第三都为1，分别内存补齐7为8，所以为 1+7 + 16 + 1+7=32
+	fmt.Println(unsafe.Sizeof(struct {
+		a bool
+		b bool
+		c string
+	}{})) // 24 bool=1 string=16 第一为1，第二接着第一为2，第二补齐6为8，所以为 1 + 1+6 + 16=24
 }

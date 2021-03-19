@@ -5,11 +5,13 @@ import "fmt"
 func main() {
 	//general()
 	//boolean()
-	integer()
+	//integer()
 	//floatAndComplex()
 	//stringAndByte()
 	//sliceAndPoint()
 	//otherFlag()
+	scan()
+	scanf()
 }
 
 type testStruct struct {
@@ -151,4 +153,29 @@ func otherFlag() {
 	fmt.Printf("%#q\n", bs)
 	fmt.Printf("% x\n", s) // 给各打印字节间加空格
 	fmt.Printf("% x\n", bs)
+}
+
+func scan() {
+	var name string
+	var age int32
+	var sex bool
+
+	fmt.Println("姓名：")
+	fmt.Scanln(&name)
+	fmt.Println("年龄：")
+	fmt.Scanln(&age)
+	fmt.Println("性别：1、男 0、女")
+	fmt.Scanln(&sex)
+
+	fmt.Printf("姓名：%s\t年龄：%d\t性别：%t\n", name, age, sex)
+}
+
+func scanf() {
+	var name string
+	var age int32
+	var sex bool
+
+	fmt.Println("姓名 年龄 性别（1：男 0：女）")
+	fmt.Scanf("%s%d%t", &name, &age, &sex)
+	fmt.Printf("姓名：%s\t年龄：%d\t性别：%t\n", name, age, sex)
 }

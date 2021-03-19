@@ -124,15 +124,18 @@ func main() {
 	//testMap()
 	//testInterface()
 	//testNil()
-	testInt()
+	lenAndDisplace()
 }
 
-const s = "aa"
+const s = "aabbccdde"
 
-func testInt() {
-	n1 := 1 << len(s[:])
+// https://zhuanlan.zhihu.com/p/74543420
+func lenAndDisplace() {
+	// 因为s[:]不是常量，所以 len(s[:]) 的结果不是常量，则 1<<len(s[:]) 结果的类型与接收者类型一样为byte。但是byte最大为255，而 1<<len(s[:]) 结果为512，超出了范围所以结果为0，最后 /128 的结果为0。
+	var n1 byte = 1 << len(s[:])
 	fmt.Println("n1:", n1)
-	n2 := 1 << len(s)
+	// 因为s为常量，所以 len(s) 的结果也为常量，则 1<<len(s) 结果的类型就为整数常量，所以结果就为512，最后 /128 的结果为4。
+	var n2 byte = 1 << len(s) / 128
 	fmt.Println("n2:", n2)
 }
 

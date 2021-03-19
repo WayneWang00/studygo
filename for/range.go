@@ -7,7 +7,8 @@ import (
 
 func main() {
 	//pointerRange()
-	rangeGo()
+	//rangeGo()
+	appendSlice()
 }
 
 func pointerRange() {
@@ -33,4 +34,13 @@ func rangeGo() {
 	}
 
 	time.Sleep(3 * time.Second)
+}
+
+func appendSlice() {
+	var value = []int{1, 2, 3, 4}
+	for k := range value { // 在range时对value进行了拷贝，所以range过程中对value的修改不会反映到range中
+		value = append(value, k)
+	}
+
+	fmt.Println("value:", value)
 }

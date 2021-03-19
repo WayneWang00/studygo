@@ -29,13 +29,16 @@ func client1() {
 	if err != nil {
 		fmt.Println("Dialing: ", err)
 	}
+
 	var wg sync.WaitGroup
 	wg.Add(2)
 	go func() {
 		defer wg.Done()
 		var args = ClientHello{"Call"}
 		var reply string
+		start := time.Now()
 		err = client.Call("Say.SayHello", args, &reply)
+		fmt.Println("duration:", time.Now().Sub(start))
 		if err != nil {
 			fmt.Println("airth error: ", err)
 		}
@@ -47,14 +50,19 @@ func client1() {
 		time.Sleep(3 * time.Second)
 		args1 := ClientHello{"GO"}
 		res := new(ClientResStr)
+		start := time.Now()
 		resCall := client.Go("Say.SayHi", args1, &res, nil)
 		replyCall := <-resCall.Done
+		fmt.Println("duration:", time.Now().Sub(start))
 		if replyCall.Error != nil {
 			fmt.Println("airth error: ", replyCall.Error)
 		}
+		fmt.Printf("resCall:%p, %+v\n", resCall.Done, replyCall)
 		fmt.Println("Go: ", res.StrHi)
 	}()
+
 	wg.Wait()
+	fmt.Println("client end")
 }
 
 func client2() {
