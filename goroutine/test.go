@@ -13,9 +13,9 @@ func paramsTest(s map[string]string, i ...interface{}) interface{} {
 }
 
 func main() {
-	//paramsTest(map[string]string{})
+	paramsTest(map[string]string{})
 	//go32()
-	Add26()
+	//Add26()
 }
 
 func go32() {

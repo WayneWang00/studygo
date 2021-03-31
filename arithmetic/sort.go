@@ -299,6 +299,7 @@ func quickDescSort(arr []int, start, end int) {
 
 // 堆排序 O(n*log n)
 /*
+	升序排序：需先构建一个大顶堆，然后将堆顶元素和末尾元素互换，即将最大的元素放到末尾。之后根据前n-1个元素构建大顶堆，再互换；再取前n-2个元素。。。直到只剩一个元素，即升序排序成功。
 	第1次：首先将未排序的序列构成一个大顶堆，然后交换序列收尾两个元素，即将该序列中的最大值移动到末尾
 	第2次：将除最后一个元素的序列再构成一个大顶堆，然后交换该序列的收尾两个元素，同样将新序列中的最大值移动到末尾
 	以此类推，直到序列只剩一个元素
@@ -320,15 +321,15 @@ func HeapSort(a []int) []int {
 }
 
 func buildMaxHeap(a []int, n int) {
-	for i := n/2 - 1; i >= 0; i-- {
+	for i := n/2 - 1; i >= 0; i-- { // n/2 - 1 堆中最后一个父节点
 		adjustHeap(a, i, n)
 	}
 }
 
 func adjustHeap(a []int, i, n int) {
-	left := 2*i + 1
-	right := 2*i + 2
-	largest := i
+	left := 2*i + 1  // 左子节点
+	right := 2*i + 2 // 右子节点
+	largest := i     // 父节点
 
 	if left < n && a[left] > a[largest] {
 		largest = left

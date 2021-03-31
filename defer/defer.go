@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 func main() {
 	//fmt.Println("a")
@@ -21,7 +24,8 @@ func main() {
 
 	//deferRecover()
 	//deferCall()
-	deferFunc()
+	//deferFunc()
+	fmt.Println(deferPanic())
 }
 
 // 1.r=0 2.r++ 3.return 	r=1
@@ -104,4 +108,20 @@ func deferFunc() {
 
 	fmt.Println("defer start")
 	deferCall()
+}
+
+func deferPanic() (err error) { // 按照下面数字依次输出 nil，b，c，a，c 	return有两步操作，defer在return第一步（即将err赋值为c）后执行，且defer里的命令在编译的时候就计算好了，因为err这是为nil所以1也为nil；而3中的err是和外层函数中的err是同一个地址，所以为c。
+	defer func() {
+		fmt.Println(err) // 3
+		fmt.Println(&err)
+		fmt.Println("a") // 4
+	}()
+
+	defer func(err error) {
+		fmt.Println(err) // 1
+		fmt.Println(&err)
+		fmt.Println("b") // 2
+	}(err)
+
+	return errors.New("c") // 5
 }

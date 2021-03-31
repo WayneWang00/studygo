@@ -45,6 +45,7 @@ func main() {
 	//}
 
 	sizeOfStruct()
+	nilP()
 }
 
 //清空已经赋值的struct
@@ -132,4 +133,17 @@ func sizeOfStruct() {
 		b bool
 		c string
 	}{})) // 24 bool=1 string=16 第一为1，第二接着第一为2，第二补齐6为8，所以为 1 + 1+6 + 16=24
+}
+
+type P struct {
+	name string
+}
+
+func (p *P) String() string {
+	return fmt.Sprintf("value:%v", p)
+}
+
+func nilP() {
+	p := &P{}
+	fmt.Println(p.String()) // 会无限递归，直至栈溢出。fmt中stringer接口有String方法，而P实现了String方法，所以P实现了接口Stringer，就会一直调用String方法。可以通过修改String方法名来避免这个问题
 }
