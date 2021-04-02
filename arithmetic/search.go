@@ -11,9 +11,9 @@ func main() {
 	//fmt.Println(binarySearchFirst(b, 3))
 	//fmt.Println(binarySearchLast(b, 3))
 
-	c := []int{1, 1, 2, 2, 3, 3, 4, 5, 5, 6, 7, 8}
-	fmt.Println(binarySearchFirstGT(c, 3))
-	fmt.Println(binarySearchLastLT(c, 3))
+	c := []int{1, 1, 2, 2, 3, 3, 5, 5, 6, 7, 8}
+	//fmt.Println(binarySearchFirstGT(c, 3))
+	fmt.Println(binarySearchLastLT(c, 4))
 
 	a := 3
 	b := 9

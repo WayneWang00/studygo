@@ -8,7 +8,8 @@ import (
 func main() {
 	//pointerRange()
 	//rangeGo()
-	appendSlice()
+	//appendSlice()
+	demo(9)
 }
 
 func pointerRange() {
@@ -43,4 +44,21 @@ func appendSlice() {
 	}
 
 	fmt.Println("value:", value)
+}
+
+var sl = []int{1, 2}
+
+func demo(v int) {
+	fmt.Println(v)
+	var s []*int
+	for _, v := range sl {
+		fmt.Println(v)
+		v++
+		fmt.Println(v, &v)
+		s = append(s, &v)
+	}
+	fmt.Println("v", v)
+	fmt.Println("sl", sl)
+	fmt.Println("s", s)
+	fmt.Println(*s[0], *s[1])
 }
