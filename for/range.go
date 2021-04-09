@@ -8,7 +8,7 @@ import (
 func main() {
 	//pointerRange()
 	//rangeGo()
-	//appendSlice()
+	appendSlice()
 	demo(9)
 }
 
@@ -42,8 +42,13 @@ func appendSlice() {
 	for k := range value { // 在range时对value进行了拷贝，所以range过程中对value的修改不会反映到range中
 		value = append(value, k)
 	}
-
 	fmt.Println("value:", value)
+
+	var m = map[string]string{"a": "one", "b": "two", "c": "three"}
+	for k := range m {
+		m[k] = k + m[k]
+	}
+	fmt.Println("m:", m)
 }
 
 var sl = []int{1, 2}
@@ -51,7 +56,7 @@ var sl = []int{1, 2}
 func demo(v int) {
 	fmt.Println(v)
 	var s []*int
-	for _, v := range sl {
+	for _, v := range sl { // 在range中v地址不变
 		fmt.Println(v)
 		v++
 		fmt.Println(v, &v)
