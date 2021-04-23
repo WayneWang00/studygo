@@ -45,7 +45,7 @@ func main() {
 	//}
 
 	sizeOfStruct()
-	nilP()
+	//nilP()
 }
 
 //清空已经赋值的struct
@@ -113,14 +113,15 @@ func (a *A) toChange() A {
 		slice：一个指针，指向底层数组，两个整形分别表示长度和容量。24字节
 */
 func sizeOfStruct() {
-	fmt.Println(unsafe.Sizeof([]int{}))        // 24
-	fmt.Println(unsafe.Sizeof(interface{}(0))) // 16
-	fmt.Println(unsafe.Sizeof(string("")))     // 16
-	fmt.Println(unsafe.Sizeof(struct{}{}))     // 0
-	fmt.Println(unsafe.Sizeof(false))          // 1
-	fmt.Println(unsafe.Sizeof(int(0)))         // 8
-	fmt.Println(unsafe.Sizeof(float32(0)))     // 4
-	fmt.Println(unsafe.Sizeof([1]int{}))       // 8
+	fmt.Println("slice:", unsafe.Sizeof([]int{}))            // slice: 24
+	fmt.Println("interface:", unsafe.Sizeof(interface{}(0))) // interface: 16
+	fmt.Println("string:", unsafe.Sizeof(string("")))        // string: 16
+	fmt.Println("struct:", unsafe.Sizeof(struct{}{}))        // struct: 0
+	fmt.Println("bool:", unsafe.Sizeof(false))               // bool: 1
+	fmt.Println("int:", unsafe.Sizeof(int(0)))               // int: 8
+	fmt.Println("float32:", unsafe.Sizeof(float32(0)))       // float32: 4
+	fmt.Println("float64:", unsafe.Sizeof(float64(0)))       // float64: 8
+	fmt.Println("array:", unsafe.Sizeof([1]int{}))           // array: 8
 
 	// 内存对齐
 	fmt.Println(unsafe.Sizeof(struct {
