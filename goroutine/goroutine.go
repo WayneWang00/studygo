@@ -13,7 +13,9 @@ var (
 
 func main() {
 	//print10()
-	print100()
+	//print100()
+	//printNumAndChar()
+	printNumAndCharByWg()
 }
 
 func print10() {
@@ -70,6 +72,81 @@ func go2() {
 	for i := 1; i <= 50; i++ {
 		if ok := <-ch2; ok {
 			fmt.Println("goroutine2:", 2*i)
+			ch1 <- true
+		}
+	}
+}
+
+func printNumAndChar() {
+	ch1 = make(chan bool, 1)
+	ch2 = make(chan bool)
+	ex = make(chan struct{})
+
+	go goNum()
+	go goChar()
+
+	ch1 <- true
+	<-ex
+}
+
+func goNum() {
+	for i := 1; i <= 10; {
+		if ok := <-ch1; ok {
+			fmt.Printf("%d%d", i, i+1)
+			i = i + 2
+			ch2 <- true
+		}
+	}
+}
+
+func goChar() {
+	defer func() {
+		fmt.Println()
+		close(ex)
+	}()
+	for i := 'A'; i <= 'J'; {
+		if ok := <-ch2; ok {
+			fmt.Printf("%c%c", i, i+1)
+			i = i + 2
+			ch1 <- true
+		}
+	}
+}
+
+func printNumAndCharByWg() {
+	ch1 = make(chan bool, 1)
+	ch2 = make(chan bool)
+	var wg sync.WaitGroup
+	wg.Add(2)
+
+	go goNumByWg(&wg)
+	go goCharByWg(&wg)
+
+	ch1 <- true
+	wg.Wait()
+}
+
+func goNumByWg(wg *sync.WaitGroup) {
+	defer wg.Done()
+	for i := 1; i <= 10; {
+		if ok := <-ch1; ok {
+			fmt.Printf("%d%d", i, i+1)
+			i += 2
+			ch2 <- true
+		}
+	}
+}
+
+func goCharByWg(wg *sync.WaitGroup) {
+	defer func() {
+		fmt.Println()
+		wg.Done()
+	}()
+
+	for i := 'A'; i <= 'J'; {
+		if ok := <-ch2; ok {
+			fmt.Printf("%c%c", i, i+1)
+			i += 2
 			ch1 <- true
 		}
 	}

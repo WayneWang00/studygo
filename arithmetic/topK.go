@@ -16,6 +16,18 @@ func main() {
 	fmt.Println("a:", a)
 	b := kForN(a, k)
 	fmt.Println("b:", b)
+
+	/*
+		有两个长度为N的升序数组，取出合并后的第N个元素
+	*/
+	a1 := buildSlice(n)
+	heapSort(a1, n)
+	fmt.Println("a1:", a1)
+	a2 := buildSlice(n)
+	heapSort(a2, n)
+	fmt.Println("a2:", a2)
+	mid := midFor2N(a1, a2, n)
+	fmt.Println("mid:", mid)
 }
 
 func buildSlice(n int) []int {
@@ -29,16 +41,36 @@ func buildSlice(n int) []int {
 	return a
 }
 
+func midFor2N(a, b []int, n int) int {
+	for i, j := 0, 0; i < len(a) || j < len(b); {
+		if i+j+2 == n {
+			if a[i] > a[j] {
+				return a[i]
+			} else {
+				return b[j]
+			}
+		}
+
+		if a[i] > b[j] {
+			j++
+		} else {
+			i++
+		}
+	}
+
+	return 0
+}
+
 func kForN(a []int, n int) []int {
 	l := len(a)
 	heapSort(a, n)
-	fmt.Println("heapSort:", a)
+	//fmt.Println("heapSort:", a)
 
 	for i := n; i < l; i++ {
 		if a[0] < a[i] {
 			a[0], a[i] = a[i], a[0]
 			heapSort(a, n)
-			fmt.Println("heapSort:\n", i, a)
+			//fmt.Println("heapSort:\n", i, a)
 		}
 	}
 
@@ -47,7 +79,7 @@ func kForN(a []int, n int) []int {
 
 func heapSort(a []int, n int) {
 	buildSmallHeap(a, n)
-	fmt.Println("buildSmallHeap:", a)
+	//fmt.Println("buildSmallHeap:", a)
 
 	for i := n - 1; i > 0; i-- {
 		a[0], a[i] = a[i], a[0]
