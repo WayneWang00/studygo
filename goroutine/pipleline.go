@@ -8,7 +8,7 @@ func main() {
 
 	// Counter
 	go func() {
-		for x := 0; x <=100; x++ {
+		for x := 0; x <= 100; x++ {
 			naturals <- x
 		}
 		close(naturals)
@@ -16,14 +16,14 @@ func main() {
 
 	// Squarer
 	go func() {
-		for x := range naturals{
+		for x := range naturals {
 			squares <- x * x
 		}
 		close(squares)
 	}()
 
 	// Printer (in main goroutine)
-	for x :=range squares{
+	for x := range squares {
 		fmt.Println(x)
 	}
 }
