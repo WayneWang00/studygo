@@ -1,0 +1,86 @@
+syntax = "v1"
+
+info (
+	title: "资产管理系统"
+	desc: "资产管理系统API接口"
+	author: "shenma"
+	version: "v1"
+)
+
+type (
+	Asset {
+		Id          int64      `json:"id"`
+		Name        string     `json:"name"`         // 资产名称
+		Code        string     `json:"code"`         // 资产编号
+		Category    string     `json:"category"`     // 资产类别
+		Status      string     `json:"status"`       // 资产状态
+		Location    string     `json:"location"`     // 存放位置
+		Price       float64    `json:"price"`        // 采购价格
+		PurchaseAt  string     `json:"purchaseAt"`   // 采购日期
+		CreateTime  string     `json:"createTime"`   // 创建时间
+		UpdateTime  string     `json:"updateTime"`   // 更新时间
+	}
+
+	CreateAssetReq {
+		Name        string     `json:"name"`
+		Code        string     `json:"code"`
+		Category    string     `json:"category"`
+		Status      string     `json:"status"`
+		Location    string     `json:"location"`
+		Price       float64    `json:"price"`
+		PurchaseAt  string     `json:"purchaseAt"`
+	}
+
+	CreateAssetResp {
+		Id          int64      `json:"id"`
+	}
+
+	UpdateAssetReq {
+		Id          int64      `json:"id"`
+		Name        string     `json:"name,optional"`
+		Category    string     `json:"category,optional"`
+		Status      string     `json:"status,optional"`
+		Location    string     `json:"location,optional"`
+		Price       float64    `json:"price,optional"`
+	}
+
+	DeleteAssetReq {
+		Id          int64      `json:"id"`
+	}
+
+	GetAssetReq {
+		Id          int64      `json:"id"`
+	}
+
+	ListAssetReq {
+		Page        int        `json:"page,optional"`
+		PageSize    int        `json:"pageSize,optional"`
+		Category    string     `json:"category,optional"`
+		Status      string     `json:"status,optional"`
+	}
+
+	ListAssetResp {
+		Total       int64      `json:"total"`
+		List        []Asset    `json:"list"`
+	}
+)
+
+@server(
+	group: asset
+)
+service assetapi {
+	@handler CreateAsset
+	post /api/assets (CreateAssetReq) returns (CreateAssetResp)
+	
+	@handler UpdateAsset
+	put /api/assets/:id (UpdateAssetReq) returns ()
+	
+	@handler DeleteAsset
+	delete /api/assets/:id (DeleteAssetReq) returns ()
+	
+	@handler GetAsset
+	get /api/assets/:id (GetAssetReq) returns (Asset)
+	
+	@handler ListAsset
+	get /api/assets (ListAssetReq) returns (ListAssetResp)
+}

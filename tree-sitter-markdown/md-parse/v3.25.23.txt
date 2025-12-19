@@ -1,0 +1,41 @@
+=== Markdown 解析结果 (v3.25.23.mdx) ===
+根节点类型: document
+根节点起始位置: 0
+根节点结束位置: 771
+子节点数量: 3
+
+=== Markdown 解析 ===
+Markdown 解析耗时: 0s
+
+=== 按标题分段打印 ===
+
+第1段: 
+位置: [12:0 - 15:0]
+字节范围: 286-384
+内容: 
+```
+# Roo Code 3.25.23 Release Notes (2025-08-22)
+
+This release adds custom base URL support for Requesty and DeepSeek V3.1 model to Chutes AI.
+
+
+```
+
+第2段: 
+位置: [16:0 - 18:169]
+字节范围: 405-771
+内容: 
+```
+# Roo Code 3.25.23 Release Notes (2025-08-22)
+## Provider Updates
+
+* **Requesty Provider**: Added support for custom base URLs, allowing you to connect to self-hosted or alternative Requesty endpoints ([#7337](https://github.com/RooCodeInc/Roo-Code/pull/7337))
+* **Chutes AI**: Added DeepSeek V3.1 model support, expanding the available model options for Chutes AI users ([#7295](https://github.com/RooCodeInc/Roo-Code/pull/7295))
+```
+按标题分段打印耗时: 0s
+
+=== 总执行时间 ===
+总耗时: 0s
+各方法耗时明细:
+  - Markdown 解析: 0s
+  - 按标题分段打印: 0s

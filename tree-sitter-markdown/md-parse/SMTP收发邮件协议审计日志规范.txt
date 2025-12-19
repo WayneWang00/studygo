@@ -1,0 +1,480 @@
+=== Markdown 解析结果 (SMTP收发邮件协议审计日志规范.md) ===
+根节点类型: document
+根节点起始位置: 0
+根节点结束位置: 23905
+子节点数量: 2
+
+=== Markdown 解析 ===
+Markdown 解析耗时: 4.2266ms
+
+=== 按标题分段打印 ===
+
+第1段: 
+位置: [2:0 - 3:0]
+字节范围: 44-46
+内容: 
+```
+# SMTP收发邮件协议审计日志规范
+
+
+```
+
+第2段: 
+位置: [4:0 - 7:0]
+字节范围: 144-315
+内容: 
+```
+# [SMTP收发邮件协议审计日志规范v1.11](#smtp收发邮件协议审计日志规范v111)
+
+当前规范主要在标准协议的基础上修改而成。当前规范主要用于具备网络流量审计能力的网络安全设备统一审计字段和格式。
+
+
+```
+
+第3段: 
+位置: [8:0 - 17:0]
+字节范围: 358-748
+内容: 
+```
+# [SMTP收发邮件协议审计日志规范v1.11](#smtp收发邮件协议审计日志规范v111)
+## [一、基本信息](#一基本信息)
+
+  -----------------------------------------------------------------------
+  **项**         **说明**
+  -------------- --------------------------------------------------------
+  制定部门       XDR安全能力部、安全服务研发部
+
+  修订人         张斌67156、华海亮33597、李凯73702
+  -----------------------------------------------------------------------
+
+
+```
+
+第4段: 
+位置: [18:0 - 63:0]
+字节范围: 791-3740
+内容: 
+```
+# [SMTP收发邮件协议审计日志规范v1.11](#smtp收发邮件协议审计日志规范v111)
+## [二、修订记录](#二修订记录)
+
+  --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  **版本**   **作者**      **日期**     **修订说明**
+  ---------- ------------- ------------ ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  v1.0       张斌67156     2022-7-5     【新增】v1.0版本归档。
+
+  v1.1       张斌67156     2022-8-12    【新增】增加SMTP日志头中文名称。
+
+             张斌67156     2022-8-12    【新增】增加示例数据。
+
+             张斌67156     2022-8-12    【修改】修改SMTP日志，源mac为srcMac。
+
+             张斌67156     2022-8-12    【修改】废弃customer字段。
+
+             张斌67156     2022-8-12    【修改】修改v字段说明。
+
+             黄得雄62520   2022-8-19    【新增】新增日志采样标识logSampled字段和链路跟踪信息logTraceInfo字段。
+
+  v1.2       张斌67156     2022-8-23    【修改】SMTP日志，中文名称格式错乱的问题
+
+             张斌67156     2022-8-23    【新增】收发邮件日志的公共头部新增customer，manageIp，deviceIp字段，其中customer是为与其他协议头保持一致而保留在表格内，实际废弃。
+
+             张斌67156     2022-9-3     【修改】将"SMTP协议审计日志规范"内两个的规范，拆分成"SMTP登录协议审计日志规范"及"SMTP收发邮件协议审计日志规范"两个独立规范，仅文档格式改动，实际规范内容无改动。
+
+  v1.3       李达85973     2022-10-20   【新增】新增源、目的资产ID字段srcAssetId、dstAssetId。
+
+  v1.4       黄得雄62520   2023-5-3     【新增】新增日志跟踪字段：logSampled、logTraceInfo、cloudTs。
+
+             刘送智55616   2023-5-3     【新增】新增分支branchId。
+
+  v1.5       陈泽鑫14892   2023-5-25    【修改】将branchId改名为regionId，并根据源目的区分为srcRegionId，dstRegionId。
+
+  v1.6       刘东昕14801   2023-9-25    【新增】新增邮件头部、二维码扫描结果字段：header、qrCodeResult。
+
+  v1.7       崔洪铭13064   2023-11-14   【修改】修改uuId格式说明。
+
+  v1.8       杨鸿威98016   2024-2-28    【新增】新增rawMsg字段。
+
+  v1.9       裴琦杰12790   2024-4-13    【新增】新增fileInfos字段。
+
+  v1.10      裴琦杰12790   2024-5-22    【修改】fileInfos内部增加contentId字段。
+
+  v1.11      纪侨斌16053   2024-8-26    【新增】新增devUId。
+  --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+```
+
+第5段: 
+位置: [64:0 - 65:0]
+字节范围: 3783-3785
+内容: 
+```
+# [SMTP收发邮件协议审计日志规范v1.11](#smtp收发邮件协议审计日志规范v111)
+## [三、规范详情](#三规范详情)
+
+
+```
+
+第6段: 
+位置: [66:0 - 220:0]
+字节范围: 3850-21326
+内容: 
+```
+# [SMTP收发邮件协议审计日志规范v1.11](#smtp收发邮件协议审计日志规范v111)
+## [三、规范详情](#三规范详情)
+### [【数据表】数据表详情](#数据表数据表详情)
+
+  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  **字段分类**   **字段名称**        **字段中文名称**   **数据类型**   **示例**                                             **组件上报**   **说明**
+  -------------- ------------------- ------------------ -------------- ---------------------------------------------------- -------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  标准版本       v                   数据版本           int            1                                                    是             根据规范版本计算。公式：版本为vx.y，则填x\*100+y。v1.0可为1或100。
+
+  租户信息       tenant              租户ID             string         \"68888888\"                                         否             
+
+                 customer            客户ID             string         \"68888888\"                                         否             【兼容 mss】其它团队不要使用
+
+  日志跟踪       logSampled          日志采样标识       int            1                                                    否             枚举【0：不采样、1：采样】，SaaS 服务应用将同步日志对账信息到SaaS XDR运营平台，云端生成，不展示
+
+                 logTraceInfo        链路跟踪信息       string         \"{\"timestamp\": 1659690727, \"appName\":           否             查看[日志跟踪规范](http://docs.sangfor.org/pages/viewpage.action?pageId=216849211)，云端生成，不展示
+                                                                       \"collect\"}\"                                                      
+
+                 cloudTs             云端相对时间       long           1647065958                                           否             日志记录时间（recordTimestamp）相对于云端的系统时间，单位为秒，详情查看日志跟踪规范。云端生成，不展示
+
+  时间属性       recordTimestamp     记录时间           long           1647065958                                           是             日志记录时间戳，精确到秒
+
+                 uploadTimestamp     上传时间           long           1647065958                                           是             日志上传时间戳，精确到秒
+
+                 insertTimestamp     入库时间           long           1647065958                                           否             日志入库时间戳，精确到秒
+
+                 recordTime          记录时间           string         \"2022-03-04 03:43:59.000\"                          是             日志记录时间字符串（本地时间），【兼容 mss】其它团队不要使用
+
+                 uploadTime          上传时间           string         \"2022-03-06 19:45:57.000\"                          是             日志上传时间字符串（本地时间），【兼容 mss】其它团队不要使用
+
+  设备信息       vendor              上报设备厂商       string         \"sangfor\"                                          是             设备厂商，使用英文
+
+                 productType         上报设备           string         \"AF\"                                               是             直接上报端产品名称，使用英文
+
+                 productVer          上报设备版本       string         \"AF8.0.1\"                                          是             直接上报端产品版本号，AF/STA 直接上报云端，这里填空
+
+                 manage              上报设备ID         string         \"HGFEDCBA\"                                         是             直接上报端设备 ID，SIP 如果转发 AF/STA 的日志上报，这里填 SIP 相关信息
+
+                 manageIp            上报设备IP         string         \"192.168.1.11\"                                     是             上报端设备IP
+
+                 originProductType   采集设备           string         \"STA\"                                              是             真实上报端产品，使用英文
+
+                 originProductVer    采集设备版本       string         \"STA3.0.1\"                                         是             真实上报端产品版本号，使用英文, AF/STA 直接上报云端，填这里
+
+                 deviceId            采集设备ID         string         \"HGFEDCBA\"                                         是             真实上报端设备 ID，SIP 如果转发 AF/STA 的日志上报，这里填对应 AF/STA 信息
+
+                 deviceIp            采集设备IP         string         \"192.168.1.11\"                                     是             真实上报设备IP
+
+                 devUId              设备类别ID         int            208                                                  是             参考[设备类别分类规范](http://code.sangfor.org/et/data_standards/tree/master/standard/category_standard/device_type_category_standard.md)
+
+  日志信息       uuId                日志ID             string         \"smtp_send_rev_log-1699113644-vP5kR\"               否             日志唯一ID，云端生成，格式为：\"smtp_send_rev_log-{10位时间戳}-{5位随机值}\"
+
+  会话信息       sessionId           会话ID             string         \"ABCDDEF\"                                          是             会话唯一 id（五元组 + 时间戳 + hash）\[设备局部唯一\]
+
+  源属性         srcIp               源IP               string         \"200.200.155.203\"                                  是             源 IP 地址
+
+                 srcPort             源端口             int            666                                                  是             源端口
+
+                 srcMac              源MAC              string         \"6C-4B-90-EE-CE-A5\"                                是             源 mac 地址
+
+                 srcIpTag            源资产标签         int            0                                                    否             枚举【0：内网、1：外网】
+
+                 srcType             源资产一级分类     int            2                                                    否             参考[资产分类规范](http://docs.sangfor.org/pages/viewpage.action?pageId=206906430)对应的分类ID
+
+                 srcSubType          源资产二级分类     int            3                                                    否             参考[资产分类规范](http://docs.sangfor.org/pages/viewpage.action?pageId=206906430)对应的分类ID
+
+                 srcCountry          源国家             string         \"China\"                                            否             源国家区域，必须英文
+
+                 srcProvince         源省份             string         \"GuangDong\"                                        否             源省份区域，必须英文
+
+                 srcCity             源城市             string         \"ShenZhen\"                                         否             源城市区域，必须英文
+
+                 srcAssetId          源资产ID           string         \"A12345678\"                                        否             源资产唯一ID，没有资产则为空
+
+                 srcRegionId         源资产域ID         string         \"000000000000000000000013\"                         否             源IP对应的资产域ID，固定24位，特殊地: \"000000000000000000000000\" 代表外网IP
+
+  目的属性       dstIp               目的IP             string         \"200.200.155.209\"                                  是             目的IP 地址
+
+                 dstPort             目的端口           int            80                                                   是             目的端口
+
+                 dstMac              目的MAC            string         \"6C-4B-90-EE-CE-A5\"                                是             目的mac 地址
+
+                 dstIpTag            目的资产标签       int            0                                                    否             枚举【0：内网、1：外网】
+
+                 dstType             目的资产一级分类   int            2                                                    否             参考[资产分类规范](http://docs.sangfor.org/pages/viewpage.action?pageId=206906430)对应的分类ID
+
+                 dstSubType          目的资产二级分类   int            3                                                    否             参考[资产分类规范](http://docs.sangfor.org/pages/viewpage.action?pageId=206906430)对应的分类ID
+
+                 dstCountry          目的国家           string         \"China\"                                            否             目的国家区域，必须英文
+
+                 dstProvince         目的省份           string         \"GuangDong\"                                        否             目的省份区域，必须英文
+
+                 dstCity             目的城市           string         \"ShenZhen\"                                         否             目的城市区域，必须英文
+
+                 dstAssetId          目的资产ID         string         \"A123456789\"                                       否             目的资产唯一ID，没有资产则为空
+
+                 dstRegionId         目的资产域ID       string         \"000000000000000000000013\"                         否             目的IP对应的资产域ID，固定24位，特殊地: \"000000000000000000000000\" 代表外网IP
+
+  协议属性       user                账号               string         \"\"                                                 是             登录用户名
+
+                 transDepth                             int            0                                                    是             消息传递的深度，不展示
+
+                 helo                Helo               string         \"\"                                                 是             Helo 头
+
+                 heloReply           Helo回复           string         \"\"                                                 是             Helo 响应信息(多个响应消息用竖线隔开)
+
+                 mailFrom            发件人             string         \"\"                                                 是             发件人
+
+                 rcptTo              收件人             string         \"\"                                                 是             收件人（多个用竖线分隔）
+
+                 date                Date               string         \"\"                                                                邮件头 Date 头，表示邮件创建的日期时间
+
+                 from                From               string         \"\"                                                                邮件头 From 头，表示发件人
+
+                 to                  To                 string         \"\"                                                                邮件头 To 头，表示收件人
+
+                 cc                  Cc                 string         \"\"                                                                邮件头 Cc 头，表示抄送地址
+
+                 replyTo             Reply-To           string         \"\"                                                                邮件头 Reply-To 头，表示回复地址 (When the \"Reply-To:\" field is present, it indicates the address(es) to which the author of the message suggests
+
+                 msgId               Message-ID         string         \"\"                                                                邮件头 Message-ID 头，信件的唯一性标志，表示邮件ID
+
+                 inReplyTo           In-Reply-To        string         \"\"                                                                邮件头 In-Reply-To 头, 表示被当前邮件回复的邮件id (The \"In-Reply-To:\" and \"References:\" fields are used when creating a reply to a message. They hold the message identifier of the
+
+                 subject             主题               string         \"\"                                                                邮件头 Subject 头，表示邮件主题
+
+                 xOriginatingIp      X-Originating-IP   string         \"\"                                                                邮件头 X-Originating-IP 头，表示邮件发送初始IP地址
+
+                 mimeVersion         Mime-Version       string         \"\"                                                                邮件头 Mime-Version 头，表示MIME协议版本
+
+                 receiveds           Received           string         \"\"                                                                邮件头 Received 头（多个用竖线隔开），表示邮件投递的路径，用以描述信件到达目的地所经过的路径以及相关信息
+
+                 lastCommand                            string         \"\"                                                                在message范围内最后一个执行的命令，不展示
+
+                 lastReplyCode                          int            0                                                                   在message范围内最后一个执行的命令的返回状态码，不展示
+
+                 lastReplyMsg                           string         \"\"                                                                在message范围内最后一个执行的命令的返回信息，不展示
+
+                 userAgent           User-Agent         string         \"\"                                                                邮件内容里面提取出的User-Agent客户端，可能来自头部：X-MAILER、USER-AGENT 或 X-USER-AGENT
+
+                 fuids                                  string         \"\"                                                                这次消息里面传了哪个文件, 多个文件用竖线隔开，不展示
+
+                 returnPath                             string         \"\"                                                                回访路径 ，新增审计todo，不展示
+
+                 bcc                 密送               string         \"\"                                                                密送人， 新增审计todo
+
+                 header              邮件头部           string         \"From: 123 <123@qq.com>\\r\\nTo:                    是             邮件头部字段，和邮件体用空行分隔，长度上限为1M
+                                                                       <45@163.com>\\r\\n\...\"                                            
+
+                 qrCodeResult        二维码扫描结果     string         \"\[{\"scanResult\":\"https://www.baidu.com\"}\]\"   是             json array格式，邮件里的二维码图片扫描后的字符串，见[【字段-qrCodeResult】详情](#%E5%AD%97%E6%AE%B5-qrcoderesult%E8%AF%A6%E6%83%85)
+
+                 fileInfos           文件信息           string         \"\[{\"depth\": 2, \"extra\": \"{\"charset\":\...\"  是             json
+                                                                                                                                           array格式，本次消息中传输的全部文件信息，不展示。从文件审计日志规范中提取。包含字段【charset、contentDisposition、depth、extractBytes、fileContent、fileName、fuid、fileId、fileType、isOrig、mimeType、seenBytes、contentId】。fileContent可为正文、附件。正文长度应小于16KB。全体附件总长度应小于16KB。
+
+  原始日志       rawMsg              原始日志           string         \"\<12\>xxxxxx\"                                     是             原始日志
+  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+```
+
+第7段: 
+位置: [221:0 - 222:0]
+字节范围: 21361-21363
+内容: 
+```
+# [SMTP收发邮件协议审计日志规范v1.11](#smtp收发邮件协议审计日志规范v111)
+## [三、规范详情](#三规范详情)
+### [数据示例](#数据示例)
+
+
+```
+
+第8段: 
+位置: [223:0 - 331:0]
+字节范围: 21411-23221
+内容: 
+```
+# [SMTP收发邮件协议审计日志规范v1.11](#smtp收发邮件协议审计日志规范v111)
+## [三、规范详情](#三规范详情)
+### [数据示例](#数据示例)
+#### [正文示例数据](#正文示例数据)
+
+{
+
+u\'receiveds\': None,
+
+u\'uid\': \'CbKyeO3rGLHkRFbJKvGMHCj\',
+
+u\'cc\': None,
+
+u\'msg_id\': \'\<201805072113353346498@126.com\>\',
+
+u\'x_originating_ip\': None,
+
+u\'last_reply_code\': 250,
+
+u\'helo\': \'Foxmail\',
+
+u\'subject\': \'attach with out suffix\',
+
+u\'trans_depth\': 1,
+
+u\'src_port\': 20357,
+
+u\'file_info\': \'\[
+
+{
+
+\"charset\": \"us-ascii\",
+
+\"depth\": 4,
+
+\"extract_bytes\": 510,
+
+\"file_type\": \"body\",
+
+\"fuid\": \"FFaWd5qdrcn68Rb3wloj35e\",
+
+\"is_orig\": true,
+
+\"mime_type\": \"text\\\\/html\",
+
+\"seen_bytes\": 510
+
+},
+
+{
+
+\"depth\": 5,
+
+\"extract_bytes\": 29,
+
+\"file_type\": \"attachment\",
+
+\"filename\": \"FUuzspT6qBZcmfzWs7u6ZIg\",
+
+\"fuid\": \"FQbFdrB1hwk3iXm2XpIQxdi\",
+
+\"is_orig\": true,
+
+\"mime_type\": \"application\\\\/octet-stream\",
+
+\"seen_bytes\": 29
+
+}
+
+\]\',
+
+u\'ts\': 1576910701,
+
+u\'src_ip\': \'200.200.88.195\',
+
+u\'to\': \'\"573069742\" \<573069742@qq.com\>\',
+
+u\'user_agent\': \'Foxmail 6, 15, 201, 23 \[en\]\',
+
+u\'last_reply_msg\': \'Mail OK queued as
+smtp7,DsmowACHK8n_UPBaRzksAQ\--.14362S2 1525698816\',
+
+u\'fuids\': \'FFaWd5qdrcn68Rb3wloj35e\|FQbFdrB1hwk3iXm2XpIQxdi\',
+
+u\'helo_reply\': \'mail\|PIPELINING\|AUTH LOGIN PLAIN \|AUTH=LOGIN
+PLAIN\|coremail
+1Uxr2xKj7kG0xkI17xGrU7I0s8FY2U3Uj8Cz28x1UUUUU7Ic2I0Y2UFql19sUCa0xDrUUUUj\|STARTTLS\|8BITMIME\',
+
+u\'user\': \'renxl_sangfor\',
+
+u\'dst_ip\': \'220.181.15.114\',
+
+u\'date\': \'Mon, 7 May 2018 21:13:36 +0800\',
+
+u\'from\': \'\"renxl_sangfor\" \<renxl_sangfor@126.com\>\',
+
+u\'in_reply_to\': None,
+
+u\'mailfrom\': \'FROM: \<renxl_sangfor@126.com\>\',
+
+u\'last_command\': \'.\',
+
+u\'rcptto\': \'TO: \<573069742@qq.com\>\',
+
+u\'dst_port\': 25,
+
+u\'reply_to\': None,
+
+u\'mime_version\': \'1.0\'
+
+}
+
+
+```
+
+第9段: 
+位置: [332:0 - 361:0]
+字节范围: 23265-23673
+内容: 
+```
+# [SMTP收发邮件协议审计日志规范v1.11](#smtp收发邮件协议审计日志规范v111)
+## [三、规范详情](#三规范详情)
+### [数据示例](#数据示例)
+#### [smtp_login数据](#smtp-login数据)
+
+{
+
+u\'password_decode\': \'base64\',
+
+u\'src_port\': 20495,
+
+u\'uid\': \'CSlc4cc1cBLcgUHIz3M6Zlb\',
+
+u\'success\': True,
+
+u\'reply_msg\': \'Authentication successful\',
+
+u\'ts\': 1576910698,
+
+u\'src_ip\': \'200.200.88.195\',
+
+u\'reply_code\': 235,
+
+u\'dst_port\': 25,
+
+u\'dst_ip\': \'123.125.50.110\',
+
+u\'password\': \'c3E1MjAxMzE0\',
+
+u\'user\': \'renxl_sangfor@126.com\'
+
+}
+
+
+```
+
+第10段: 
+位置: [362:0 - 368:0]
+字节范围: 23741-23905
+内容: 
+```
+# [SMTP收发邮件协议审计日志规范v1.11](#smtp收发邮件协议审计日志规范v111)
+## [三、规范详情](#三规范详情)
+### [数据示例](#数据示例)
+#### [【字段-qrCodeResult】详情](#字段-qrcoderesult详情)
+
+json array格式。包含以下字段：
+
+- scanResult: 邮件里的二维码图片扫描后的字符串。
+
+\[{\"scanResult\": \"https://www.baidu.com\"}\]
+
+```
+按标题分段打印耗时: 548.3µs
+
+=== 总执行时间 ===
+总耗时: 4.7749ms
+各方法耗时明细:
+  - Markdown 解析: 4.2266ms
+  - 按标题分段打印: 548.3µs

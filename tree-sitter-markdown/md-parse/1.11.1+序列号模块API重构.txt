@@ -1,0 +1,260 @@
+=== Markdown 解析结果 (1.11.1+序列号模块API重构.md) ===
+根节点类型: document
+根节点起始位置: 0
+根节点结束位置: 5416
+子节点数量: 1
+
+=== Markdown 解析 ===
+Markdown 解析耗时: 1.5804ms
+
+=== 按标题分段打印 ===
+
+第1段: 
+位置: [2:0 - 5:0]
+字节范围: 35-81
+内容: 
+```
+# 1.11.1 序列号模块API重构
+
+> API设计,抽象,解耦,可扩展 \...
+
+
+```
+
+第2段: 
+位置: [6:0 - 7:0]
+字节范围: 119-121
+内容: 
+```
+# 1.11.1 序列号模块API重构
+## 序列号模块API设计的重构
+
+
+```
+
+第3段: 
+位置: [8:0 - 42:0]
+字节范围: 157-843
+内容: 
+```
+# 1.11.1 序列号模块API重构
+## 序列号模块API设计的重构
+### 序列号模块的基本思路
+
+基本思路是：
+
+1.  
+
+> 用户在设备页面上填入唯一用户ID；
+
+2.  
+3.  
+
+> 获取设备的硬件信息；
+
+4.  
+5.  
+
+> 将设备硬件信息和唯一用户ID邮件发给销售代理，或者输入网站的自助授权页面；
+
+6.  
+7.  
+
+> 授权工具从CRM系统查询用户的授权信息，或者手动指定授权，将硬件信息，唯一用户ID，及授权信息整合在一起，签名，得到签名的授权文件。
+
+8.  
+9.  
+
+> 客户获取签名的授权文件，导入设备；
+
+10. 
+11. 
+
+> 模块运行时查询授权文件，验证签名，获取指定的授权信息，比如分支数，升级权限等；
+
+12. 
+
+
+```
+
+第4段: 
+位置: [43:0 - 52:0]
+字节范围: 872-1347
+内容: 
+```
+# 1.11.1 序列号模块API重构
+## 序列号模块API设计的重构
+### V1版本的序列号API
+
+下列代码是设计人员完成的第一个版本的API声明：
+
+- [sf_license-v1.h](/download/attachments/39871219/sf_license-v1.h?version=1&modificationDate=1665402563000&api=v2)
+
+可以看到，这个API设计非常复杂。
+
+原因是授权模块有多种使用场景，有授权服务器，有单设备授权。为了保证授权模块的通用性，灵活性，设计了一套钩子机制，用于业务模块自定义处理不同类型的授权信息。
+
+
+```
+
+第5段: 
+位置: [53:0 - 92:0]
+字节范围: 1376-2687
+内容: 
+```
+# 1.11.1 序列号模块API重构
+## 序列号模块API设计的重构
+### V2版本的序列号API
+
+与V1版本相比，V2版本大幅消减了API的复杂度，将V1版本的18个API降低到了5个，并去掉了一个复杂的结构体authorize_module，这个结构体有7个回调函数需要业务模块实现。
+
+之所以可以如此大程度的简化V1版本的API，在于对序列号模块本质的洞察，并建立了一个良好的抽象。
+
+序列号模块本质上是一个加密数据库，给每个模块存储了一段授权信息（JSON格式）。发货部门使用该设备的唯一客户号+硬件ID信息+证书私钥进行加密，业务模块需要检查授权信息时，使用唯一客户号+设备硬件ID+证书公钥进行解密。
+
+有了这个抽象，我们只需要这几个API即可实现非常灵活而安全的授权检查机制：
+
+1.  
+
+> 设置客户号：set_key_id；
+
+2.  
+3.  
+
+> 获取硬件ID：get_dossier；
+
+4.  
+5.  
+
+> 加载授权文件：load_license_file；
+
+6.  
+7.  
+
+> 查询指定模块的授权信息：query_license；
+
+8.  
+9.  
+
+> 用于获取错误信息的调试函数：get_err_msg；
+
+10. 
+
+设计人员根据前述分析进行了重构，下列代码就是重构后的第2个版本：
+
+- [sf_license-v2.h](/download/attachments/39871219/sf_license-v2.h?version=1&modificationDate=1665402562000&api=v2)
+
+
+```
+
+第6段: 
+位置: [93:0 - 119:0]
+字节范围: 2716-3882
+内容: 
+```
+# 1.11.1 序列号模块API重构
+## 序列号模块API设计的重构
+### V3版本的序列号API
+
+与V2版本相比，V3去掉了is_license_valid，去掉了query_license函数的query_condition参数。
+
+序列号负责验证序列号文件的有效性，并将完整的序列号信息(JSON值)返回给调用者。大幅降低了序列号模块的设计难度，不再需要解析复杂的query_condition。
+
+query_license返回的是一个JSON，从JSON里获取指定的成员对于上层业务模块来说是很简单的一件事情。设计一个query_condition，去获取指定的成员反而非常困难，不仅难以实现，也难以使用。所以，简单把完整的JSON返回给上层由上层进行处理是个更合理的设计。
+
+V2版本：
+
+LICENSE_C_API int is_license_valid(const char \*path);
+
+LICENSE_C_API int query_license(const char \*module_name, const char
+\*query_condition,
+
+char \*\*out, unsigned int \*out_len);
+
+V3版本：
+
+LICENSE_C_API int query_license(const char \*module_name,
+
+char \*\*out, unsigned int \*out_len);
+
+下列代码就是改正上述问题后的第3个版本：
+
+- [sf_license-v3.h](/download/attachments/39871219/sf_license-v3.h?version=1&modificationDate=1665402563000&api=v2)
+
+
+```
+
+第7段: 
+位置: [120:0 - 146:0]
+字节范围: 3911-4728
+内容: 
+```
+# 1.11.1 序列号模块API重构
+## 序列号模块API设计的重构
+### V4版本的序列号API
+
+与V3相比，V4不同点在get_dossier和query_license。
+
+V3版本的使用者承担了释放dossier和out的职责。 V4版本模仿了windows
+API的常见做法，先通过第一次调用获取需分配内存的大小，第二次调用获取结果。
+
+V3版本：
+
+LICENSE_C_API int get_dossier(char \*\*dossier, unsigned int \*len);
+
+LICENSE_C_API int query_license(const char \*module_name,
+
+char \*\*out, unsigned int \*out_len);
+
+V4版本：
+
+LICENSE_C_API int get_dossier(char \*dossier, unsigned int \*len);
+
+LICENSE_C_API int query_license(const char \*module_name,
+
+char \*out, unsigned int \*out_len);
+
+下列代码是修正上述问题后的第4个版本：
+
+- [sf_license-v4.h](/download/attachments/39871219/sf_license-v4.h?version=1&modificationDate=1665402563000&api=v2)
+
+
+```
+
+第8段: 
+位置: [147:0 - 167:0]
+字节范围: 4757-5416
+内容: 
+```
+# 1.11.1 序列号模块API重构
+## 序列号模块API设计的重构
+### V5版本的序列号API
+
+V4版本还不够完美，比如：
+
+1.  
+
+> 各个API之间，需要全局变量来传递信息；
+
+2.  
+3.  
+
+> load_license_file函数有点多余，对用户来说，并不是必要的显式步骤，可以整合到查询过程；
+
+4.  
+5.  
+
+> set_key_id和get_dossier是特殊场景下用到的API，主要用于配置授权的CGI。作为获取授权的模块来说，这两步也是隐式步骤，可以整合到查询过程。不同用途的API，可以分离到不同的头文件，降低使用难度（参考lua的头文件设计）。
+
+6.  
+
+具体怎么做，各位读者不妨自己琢磨一下，尝试动手优化看看。
+
+```
+按标题分段打印耗时: 0s
+
+=== 总执行时间 ===
+总耗时: 1.5804ms
+各方法耗时明细:
+  - Markdown 解析: 1.5804ms
+  - 按标题分段打印: 0s

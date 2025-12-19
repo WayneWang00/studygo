@@ -1,0 +1,7 @@
+github.com/minio/highwayhash v1.0.3 h1:kbnuUMoHYyVl7szWjSxJnxw11k2U709jqFPPmIUyD6Q=
+github.com/minio/highwayhash v1.0.3/go.mod h1:GGYsuwP/fPD6Y9hMiXuapVvlIUEhFhMTh0rxU3ik1LQ=
+github.com/minio/rsync-go v0.0.0-20240817220834-ce5fd82ebc06 h1:kjinakTDIVwPXy66wTtSk9NGwi3YR8Aw2DSWRdR/5Ak=
+github.com/minio/rsync-go v0.0.0-20240817220834-ce5fd82ebc06/go.mod h1:ToAWFIEgWQXhwj9BKDuHPPO/K4L0NfnfNcSuc3tOt7s=
+golang.org/x/sys v0.21.0/go.mod h1:/VUhepiaJMQUp4+oa/7Zr1D23ma6VTLIYjOOTFZPUcA=
+golang.org/x/sys v0.24.0 h1:Twjiwq9dn6R1fQcyiK+wQyHWfaz/BJB+YIpzU/Cv3Xg=
+golang.org/x/sys v0.24.0/go.mod h1:/VUhepiaJMQUp4+oa/7Zr1D23ma6VTLIYjOOTFZPUcA=
